@@ -19,10 +19,10 @@ This SQL queries creates the important tables & imports the CSV files.
 --- 1) Creating customer_ratings Table 
 
 CREATE TABLE Customer_Ratings (
-Consumer_ID  	VARCHAR(50),
-Restaurant_ID	VARCHAR(50),
-Overall_Rating	INT,
-Food_Rating		INT,
+Consumer_ID  	  VARCHAR(50),
+Restaurant_ID	  VARCHAR(50),
+Overall_Rating  INT,
+Food_Rating		  INT,
 Service_Rating	INT
 )
 
@@ -34,20 +34,20 @@ Select * FROM customer_ratings
 --- 2) Creating customer_details table
 
 CREATE TABLE Customer_Details(
-Consumer_ID 			Varchar(50),
-City					Varchar(50),
-State					Varchar(50),
-Country					Varchar(50),
-Latitude				Decimal,
-Longitude				Decimal,
-Smoker					Varchar(50),
-Drink_Level				Varchar(50),
-Transportation_Method	Varchar(50),
-Marital_Status			Varchar(50),
-Children				Varchar(50),
-Age						INT,
-Occupation				Varchar(50),
-Budget					Varchar(50)
+Consumer_ID 			      Varchar(50),
+City					          Varchar(50),
+State					          Varchar(50),
+Country					        Varchar(50),
+Latitude				        Decimal,
+Longitude				        Decimal,
+Smoker					        Varchar(50),
+Drink_Level				      Varchar(50),
+Transportation_Method	  Varchar(50),
+Marital_Status			    Varchar(50),
+Children				        Varchar(50),
+Age						          INT,
+Occupation				      Varchar(50),
+Budget					        Varchar(50)
 )
 
 COPY Customer_Details FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_Ratings\consumers.csv' Header CSV
@@ -55,8 +55,8 @@ COPY Customer_Details FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_R
 --- 3) Creating Customer Preference table
 
 CREATE TABLE Customer_Preference(
-Consumer_ID			Varchar(50),
-Preferred_Cuisine	Varchar(50)
+Consumer_ID			    Varchar(50),
+Preferred_Cuisine	  Varchar(50)
 )
 
 COPY Customer_Preference FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_Ratings\consumer_preferences.csv' Header CSV
@@ -66,19 +66,19 @@ COPY Customer_Preference FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restauran
 
 CREATE TABLE Restaurants (
 Restaurant_ID  		Varchar(50),
-Name				Varchar(100),
-City				Varchar(50),
-State				Varchar(50),
-Country				Varchar(50),
-Zip_Code			Varchar(50),
-Latitude			Decimal,
-Longitude			Decimal,
+Name				      Varchar(100),
+City				      Varchar(50),
+State				      Varchar(50),
+Country				    Varchar(50),
+Zip_Code			    Varchar(50),
+Latitude			    Decimal,
+Longitude			    Decimal,
 Alcohol_Service		Varchar(50),
 Smoking_Allowed		Varchar(50),
-Price				Varchar(50),
-Franchise			Varchar(50),
-Area				Varchar(50),
-Parking				Varchar(100)
+Price				      Varchar(50),
+Franchise			    Varchar(50),
+Area				      Varchar(50),
+Parking				    Varchar(100)
 )
 
 COPY Restaurants FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_Ratings\restaurants.csv' Header CSV
@@ -87,8 +87,8 @@ COPY Restaurants FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_Rating
 --- Creating restaurant_cuisines Table 
 
 CREATE TABLE restaurant_cuisines (
-Restaurant_ID	Varchar(50),
-Cuisine			Varchar(50)
+Restaurant_ID	  Varchar(50),
+Cuisine			    Varchar(50)
 )
 
 COPY restaurant_cuisines FROM 'C:\Program Files\PostgreSQL\14\Datasets\Restaurant_Ratings\restaurant_cuisines.csv' Header CSV
