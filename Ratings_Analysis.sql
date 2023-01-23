@@ -264,36 +264,36 @@ ORDER BY cuisine
 	
 CREATE VIEW count_cuisines as (
 SELECT 	
-		cuisine,
-		count(cuisine)	as count
-FROM average_analysis
+	 cuisine,
+	 count(cuisine)	as count
+FROM     average_analysis
 GROUP BY cuisine	)	
 		
 CREATE VIEW bad as (
 SELECT 
-		cuisine,
-		First_value(name) OVER(partition by cuisine ORDER BY overall_rating ) as bad_for_overall,
-		First_value(name) OVER(partition by cuisine ORDER BY food_rating ) as bad_for_food,
-		First_value(name) OVER(partition by cuisine ORDER BY service_rating ) as bad_for_service	
-FROM ( 	
-		SELECT 
-				a.name,
-				ROUND(AVG(a.overall_rating),2)as overall_Rating,
-				ROUND(AVG(a.food_rating),2)as food_rating,
-				ROUND(AVG(a.service_rating),2)as service_rating,
-				a.cuisine,
-				cc.count
-		FROM average_analysis as a
-		INNER JOIN count_cuisines as cc
-		ON a.cuisine = cc.cuisine
-		WHERE cc.count > 1	
-		GROUP BY a.name,a.cuisine,cc.count
-		ORDER BY a.cuisine	) as least )
+	cuisine,
+	First_value(name) OVER(partition by cuisine ORDER BY overall_rating ) as bad_for_overall,
+	First_value(name) OVER(partition by cuisine ORDER BY food_rating ) as bad_for_food,
+	First_value(name) OVER(partition by cuisine ORDER BY service_rating ) as bad_for_service	
+FROM    ( 	
+	    SELECT 
+		       a.name,
+		       ROUND(AVG(a.overall_rating),2)as overall_Rating,
+		       ROUND(AVG(a.food_rating),2)as food_rating,
+		       ROUND(AVG(a.service_rating),2)as service_rating,
+		       a.cuisine,
+		       cc.count
+	    FROM       average_analysis as a
+	    INNER JOIN count_cuisines as cc
+	    ON         a.cuisine = cc.cuisine
+	    WHERE      cc.count > 1	
+	    GROUP BY   a.name,a.cuisine,cc.count
+	    ORDER BY   a.cuisine) as least 
+         )
 
 
-SELECT 
-		*
-FROM bad
+SELECT   *
+FROM     bad
 GROUP BY cuisine, bad_for_overall, bad_for_food, bad_for_service
 ORDER BY cuisine	
 
@@ -301,17 +301,17 @@ ORDER BY cuisine
 --- Q39) Best cuisines by different ratings
 	
 SELECT 
-		First_value(cuisine) OVER(ORDER BY overall_rating desc) as overall,
-		First_value(cuisine) OVER(ORDER BY food_rating desc) as food,
-		First_value(cuisine) OVER(ORDER BY service_rating desc) as service
-FROM average_analysis
-LIMIT 1	
+	First_value(cuisine) OVER(ORDER BY overall_rating desc) as overall,
+	First_value(cuisine) OVER(ORDER BY food_rating desc) as food,
+	First_value(cuisine) OVER(ORDER BY service_rating desc) as service
+FROM    average_analysis
+LIMIT   1	
 
 
 --- Q40) Total customers with highest ratings in all different criteria
 SELECT 
-		count(consumer_id) as total_customers
+	count(consumer_id) as total_customers
 FROM 	customer_ratings
 WHERE 	overall_rating = 2 and
-		food_rating = 2 and
-		service_rating = 2
+	food_rating = 2 and
+	service_rating = 2
