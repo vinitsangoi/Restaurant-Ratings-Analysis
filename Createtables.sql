@@ -21,7 +21,7 @@ This SQL queries creates the important tables & imports the CSV files.
 CREATE TABLE Customer_Ratings (
 Consumer_ID  	  VARCHAR(50),
 Restaurant_ID	  VARCHAR(50),
-Overall_Rating  INT,
+Overall_Rating   INT,
 Food_Rating		  INT,
 Service_Rating	INT
 )
